@@ -19,25 +19,22 @@ CanvasVisualizer.prototype = new Visualizer();
 
 CanvasVisualizer.prototype.initialize = function () {
     var cnv = this.canvas.get(0);
-
+    this.ctx = cnv.getContext("2d");
+    
+    $(this.canvas).css('background-color', this.parameters.bgColor);
+    
     this.width = this.frequency_data.length;
     this.height = this.frequency_data.length / 4;
 
     cnv.width = this.width;
     cnv.height = this.height;
-
-    this.ctx = cnv.getContext("2d");
-    this.ctx.restore();
-    this.ctx.fillStyle = this.parameters.bgColor;
-    this.ctx.fillRect(0, 0, this.width, this.height);
-
 };
 
 
 CanvasVisualizer.prototype.drawBar = function (x, y, w, h, c) {
 
-    this.ctx.fillStyle = this.parameters.bgColor;
-    this.ctx.fillRect(x, 0, w + this.parameters.borderSize, this.height);
+
+    this.ctx.clearRect(x, 0, w + this.parameters.borderSize, this.height);
 
     if (h === 0) {
         return;
