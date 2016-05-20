@@ -1,6 +1,16 @@
+var
+        src_files = [
+            'src/*.js', 'src/Visualizers/*.js'
+        ],
+        default_tasks = [
+            'jshint', 'comments', 'concat'
+        ]
+        ;
+
 module.exports = function (grunt) {
     require('jit-grunt')(grunt);
     grunt.loadNpmTasks('grunt-stripcomments');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -10,7 +20,12 @@ module.exports = function (grunt) {
                     singleline: true,
                     multiline: true
                 },
-                src: [ 'src/*.js' ]
+                src: src_files
+            }
+        },
+        jshint: {
+            files: {
+                src: src_files
             }
         },
         concat: {
@@ -21,9 +36,7 @@ module.exports = function (grunt) {
                 },
                 files: [
                     {
-                        src: [
-                            'src/*.js', 'src/Visualizers/*.js'
-                        ],
+                        src: src_files,
                         dest: 'js/dist/audiovis.js'
                     }
                 ]
@@ -31,13 +44,11 @@ module.exports = function (grunt) {
         },
         watch: {
             js: {
-                files: [
-                    'src/*.js', 'src/Visualizers/*.js'
-                ],
-                tasks: ['comments','concat']
+                files: src_files,
+                tasks: default_tasks
             }
         }
     });
 
-    grunt.registerTask('default', ['comments','concat']);
+    grunt.registerTask('default', default_tasks);
 };

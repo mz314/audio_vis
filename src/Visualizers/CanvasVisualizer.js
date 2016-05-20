@@ -39,7 +39,7 @@ CanvasVisualizer.prototype.drawFreqBars = function (frequency_data) {
             x = 0;
     
     for (var i in frequency_data) {
-        if (i % divider != 0) {
+        if (i % divider !== 0) {
             continue;
         }
         h = frequency_data[i];
@@ -56,7 +56,5 @@ CanvasVisualizer.prototype.start = function () {
     setInterval(function () {
         self.analyser.getByteFrequencyData(self.frequency_data);
         self.drawFreqBars(self.frequency_data);
-
-
     }, 100);
 };

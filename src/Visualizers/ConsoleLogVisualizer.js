@@ -1,6 +1,6 @@
 var ConsoleLogVisualizer = function () {
  
-}
+};
 
 ConsoleLogVisualizer.prototype = new Visualizer();
 
