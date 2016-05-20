@@ -19,7 +19,6 @@ CanvasVisualizer.prototype.initialize = function () {
     this.ctx.restore();
     this.ctx.fillStyle = this.bgcolor;
     this.ctx.fillRect(0, 0, this.width, this.height);
-    console.log(this.canvas);
 };
 
 
@@ -29,7 +28,6 @@ CanvasVisualizer.prototype.drawBar = function (x, y, w, h, c) {
     this.ctx.fillRect(x, 0, w, this.height);
 
     this.ctx.fillStyle = c;
-
     this.ctx.fillRect(x, y, w, h);
 };
 

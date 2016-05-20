@@ -1,4 +1,5 @@
 var AudioVis = function (audio, visualizer) {
+    
     var self = this;
     this.audio = audio;
 
@@ -24,7 +25,5 @@ var AudioVis = function (audio, visualizer) {
     this.audio.onpause = function () {
         self.visualizer.stop();
     };
-
-
 
 };
