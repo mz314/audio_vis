@@ -2,7 +2,7 @@ var ConsoleLogVisualizer = function () {
  
 }
 
-ConsoleLogVisualizer.prototype = Visualizer.prototype;
+ConsoleLogVisualizer.prototype = new Visualizer();
 
 
 ConsoleLogVisualizer.prototype.start = function () {

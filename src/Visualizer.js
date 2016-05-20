@@ -1,5 +1,4 @@
 var Visualizer=function() {
-  
 };
 
 Visualizer.prototype.setAnalyzerData = function(analyser, frequency_data) {

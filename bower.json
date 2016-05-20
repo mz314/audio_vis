@@ -1,5 +1,5 @@
 {
-  "name": "musicvis",
+  "name": "audiovis",
   "version": "0.0.0",
   "homepage": "",
   "authors": [
@@ -17,7 +17,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "*",
-    "jplayer": "2.9.2"
+    "jquery": "*"
   }
 }

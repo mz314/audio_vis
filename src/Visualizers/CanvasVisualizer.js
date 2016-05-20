@@ -3,7 +3,7 @@ var CanvasVisualizer = function (canvas_selector) {
     this.canvas = $(canvas_selector);
 };
 
-CanvasVisualizer.prototype = Visualizer.prototype;
+CanvasVisualizer.prototype = new Visualizer();
 
 CanvasVisualizer.prototype.initialize = function () {
     var cnv = this.canvas.get(0);
@@ -16,8 +16,6 @@ CanvasVisualizer.prototype.initialize = function () {
     cnv.height=this.height;
   
     this.ctx = cnv.getContext("2d");
-    this.imgdata = this.ctx.createImageData(this.width, this.height);
-    this.ctx.putImageData(this.imgdata, 0, 0);
     this.ctx.restore();
     this.ctx.fillStyle = this.bgcolor;
     this.ctx.fillRect(0, 0, this.width, this.height);
@@ -49,7 +47,7 @@ CanvasVisualizer.prototype.drawFreqBars = function (frequency_data) {
         h = frequency_data[i];
        
         
-        this.drawBar(x, this.height-h, w, h, '#ff0000');
+        this.drawBar(x, this.height-h, w, h, '#0000ff');
         x += w;
     }
 
