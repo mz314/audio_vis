@@ -3,16 +3,14 @@ var CanvasVisualizer = function (canvas_selector, parameters) {
     this.canvas = $(canvas_selector);
     this.parameters = {
         divider: 50,
-        bgColor: "#aaaaaa",
+        bgColor: null,
         barColor: "#0000ff",
         borderSize: 1,
         borderColor: "#ff0000",
-        refreshInterval: 50,
+        refreshInterval: 50
     };
 
-
     this.parameters = $.extend(this.parameters, parameters);
-
 };
 
 CanvasVisualizer.prototype = new Visualizer();
@@ -21,7 +19,9 @@ CanvasVisualizer.prototype.initialize = function () {
     var cnv = this.canvas.get(0);
     this.ctx = cnv.getContext("2d");
     
-    $(this.canvas).css('background-color', this.parameters.bgColor);
+    if(this.parameters.bgColor!==null) {
+       $(this.canvas).css('background-color', this.parameters.bgColor);
+    }
     
     this.width = this.frequency_data.length;
     this.height = this.frequency_data.length / 4;
@@ -33,13 +33,11 @@ CanvasVisualizer.prototype.initialize = function () {
 
 CanvasVisualizer.prototype.drawBar = function (x, y, w, h, c) {
 
-
     this.ctx.clearRect(x, 0, w + this.parameters.borderSize, this.height);
 
     if (h === 0) {
         return;
     }
-
 
     this.ctx.fillStyle = c;
     this.ctx.fillRect(x, y, w, h);
