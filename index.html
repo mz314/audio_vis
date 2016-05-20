@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script src="js/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="js/vendor/jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
+        <script src="js/AudioVis.js"></script>
+        <script src="js/Visualizer.js"></script>
+        <script src="js/ConsoleLogVisualizer.js"></script>
+        <script src="js/CanvasVisualizer.js"></script>
+        <script src="js/play.js"></script>
+    </head>
+    <body>
+
+        <div>
+            <canvas id="v-canvas"
+                   style="width: 500px; height:200px"
+                    ></canvas>
+        </div>
+        <input type="text" id="filename" value="mp3/test.mp3" placeholder="mp3 track" />
+        <br />
+        <button id="play">Play</button>
+        <audio id="audio-track" ></audio>
+    </body>
+</html>
+
