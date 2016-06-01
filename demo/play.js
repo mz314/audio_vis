@@ -5,7 +5,7 @@ var getVisualizer = function (type) {
     var visualizer;
     switch (type) {
         case 'bar':
-            visualizer = new BarVisualizer('#v-canvas', {
+            visualizer = new BarVisualizer('#c-container', {
                 divider: 30,
                 borderSize: 1,
                 borderColor: "#000000",
@@ -40,7 +40,7 @@ var bindDemoSwitch = function () {
 $(function () {
 
 
-    vis = new AudioVis($('#audio-track').get(0), getVisualizer('glball'));
+    vis = new AudioVis($('#audio-track').get(0), getVisualizer('bar'));
 
     $("#play").click(function () {
 

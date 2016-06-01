@@ -1,23 +1,31 @@
-var BarVisualizer = function (canvas_selector, parameters) {
-    this.canvas_selector = canvas_selector;
-    this.canvas = $(canvas_selector);
+var BarVisualizer = function (container_selector, parameters) {
+    
+    
+    this.canvas = document.createElement('canvas');
+    $(container_selector).append(this.canvas);
     this.parameters = {
         divider: 50,
         bgColor: null,
         barColor: "#0000ff",
         borderSize: 1,
         borderColor: "#ff0000",
-        refreshInterval: 50
+        refreshInterval: 50,
+        scaleWidth: '500px',
+        scaleHeight: '200px'
     };
-
+    
     this.parameters = $.extend(this.parameters, parameters);
+    
+    $(this.canvas).css('width', this.parameters.scaleWidth);
+    $(this.canvas).css('height', this.parameters.scaleHeight);
+    
     this.interval = null;
 };
 
 BarVisualizer.prototype = new Visualizer();
 
 BarVisualizer.prototype.initialize = function () {
-    var cnv = this.canvas.get(0);
+    var cnv = this.canvas;
     this.ctx = cnv.getContext("2d");
 
     if (this.parameters.bgColor !== null) {
