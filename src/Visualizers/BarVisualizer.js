@@ -1,4 +1,4 @@
-var CanvasVisualizer = function (canvas_selector, parameters) {
+var BarVisualizer = function (canvas_selector, parameters) {
     this.canvas_selector = canvas_selector;
     this.canvas = $(canvas_selector);
     this.parameters = {
@@ -11,18 +11,19 @@ var CanvasVisualizer = function (canvas_selector, parameters) {
     };
 
     this.parameters = $.extend(this.parameters, parameters);
+    this.interval = null;
 };
 
-CanvasVisualizer.prototype = new Visualizer();
+BarVisualizer.prototype = new Visualizer();
 
-CanvasVisualizer.prototype.initialize = function () {
+BarVisualizer.prototype.initialize = function () {
     var cnv = this.canvas.get(0);
     this.ctx = cnv.getContext("2d");
-    
-    if(this.parameters.bgColor!==null) {
-       $(this.canvas).css('background-color', this.parameters.bgColor);
+
+    if (this.parameters.bgColor !== null) {
+        $(this.canvas).css('background-color', this.parameters.bgColor);
     }
-    
+
     this.width = this.frequency_data.length;
     this.height = this.frequency_data.length / 4;
 
@@ -31,7 +32,7 @@ CanvasVisualizer.prototype.initialize = function () {
 };
 
 
-CanvasVisualizer.prototype.drawBar = function (x, y, w, h, c) {
+BarVisualizer.prototype.drawBar = function (x, y, w, h, c) {
 
     this.ctx.clearRect(x, 0, w + this.parameters.borderSize, this.height);
 
@@ -49,7 +50,7 @@ CanvasVisualizer.prototype.drawBar = function (x, y, w, h, c) {
 
 };
 
-CanvasVisualizer.prototype.drawFreqBars = function (frequency_data) {
+BarVisualizer.prototype.drawFreqBars = function (frequency_data) {
 
     var
             w = Math.floor(this.width / (frequency_data.length / this.parameters.divider)),
@@ -68,10 +69,24 @@ CanvasVisualizer.prototype.drawFreqBars = function (frequency_data) {
 
 };
 
-CanvasVisualizer.prototype.start = function () {
+BarVisualizer.prototype.start = function () {
     var self = this;
-    setInterval(function () {
-        self.analyser.getByteFrequencyData(self.frequency_data);
+    if (this.interval) {
+        return;
+    }
+    this.interval = setInterval(function () {
+         self.analyser.getByteFrequencyData(self.frequency_data);
+        console.log(self.frequency_data);
         self.drawFreqBars(self.frequency_data);
     }, this.parameters.refreshInterval);
-}; 
+};
+
+BarVisualizer.prototype.stop = function () {
+    var self = this;
+    setTimeout(function () {
+        if (self.interval) {
+            clearInterval(this.interval);
+        }
+    }, self.parameters.refreshInterval);
+
+};

@@ -1,13 +1,14 @@
-(function( $ ) {
- 
-    $.fn.audioVis = function() {
-        console.log('$(selector) entrypoint');
+(function ($) {
+
+    $.fn.audioVis = function (visualizer) {
+        new AudioVis($(this).get(0), visualizer);
+
     };
-    
+
     $.audioVis = function () {
-      console.log('$.audioVis() entrypoint');  
+        console.log('$.audioVis() entrypoint');
     };
- 
-    
- 
-}( jQuery ));
+
+
+
+}(jQuery));

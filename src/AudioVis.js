@@ -1,9 +1,15 @@
 var AudioVis = function (audio, visualizer) {
-    
+    console.log('audiovis init');
     var self = this;
     this.audio = audio;
-
-    this.ctx = new AudioContext();
+    
+    if(window.AudioContext) {
+        this.ctx = new window.AudioContext();
+    } else {
+        this.ctx = new window.webkitAudioContext();
+    }
+    
+     
     this.analyser = self.ctx.createAnalyser();
 
     this.source = self.ctx.createMediaElementSource(self.audio);
@@ -16,6 +22,7 @@ var AudioVis = function (audio, visualizer) {
     this.visualizer.initialize();
     
     this.audio.onplay = function () {
+        console.log('onplay');
         self.visualizer.start();
     };
 

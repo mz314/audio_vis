@@ -2,7 +2,7 @@
 
 $(function () {
     
-    canvas_visualizer = new CanvasVisualizer('#v-canvas', {
+    visualizer = new BarVisualizer('#v-canvas', {
        divider: 30,
        borderSize:1,
        borderColor: "#000000",
@@ -11,13 +11,19 @@ $(function () {
        refreshInterval: 24
     });
     
-    new AudioVis($('#audio-track').get(0), canvas_visualizer);
+    // var visualizer = new WaveformVisualizer();
+    
+    new AudioVis($('#audio-track').get(0), visualizer);
     
     $("#play").click(function () {
 
         $('#audio-track').attr('src', $('#filename').val());
         $('#audio-track').get(0).play();
 
+    });
+    
+    $('#pause').click(function () {
+       $('#audio-track').get(0).pause();
     });
 
 });

@@ -7,7 +7,7 @@ Visualizer.prototype.setAnalyzer = function(analyser) {
     this.timedomain_data = new Uint8Array(this.analyser.frequencyBinCount);
 };
 
-Visualizer.prototype.initalize = function () {
+Visualizer.prototype.initialize = function () {
     
 };
 
