@@ -75,8 +75,8 @@ BarVisualizer.prototype.start = function () {
         return;
     }
     this.interval = setInterval(function () {
-         self.analyser.getByteFrequencyData(self.frequency_data);
-        console.log(self.frequency_data);
+        self.analyser.getByteFrequencyData(self.frequency_data);
+        //console.log(self.frequency_data);
         self.drawFreqBars(self.frequency_data);
     }, this.parameters.refreshInterval);
 };

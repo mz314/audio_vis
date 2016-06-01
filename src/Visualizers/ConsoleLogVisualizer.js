@@ -14,4 +14,4 @@ ConsoleLogVisualizer.prototype.start = function () {
     }, 100);
 };
 
-ConsoleLogVisualizer.prototype.constructor = ConsoleLogVisualizer;
+

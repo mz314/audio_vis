@@ -1,15 +1,13 @@
 var AudioVis = function (audio, visualizer) {
-    console.log('audiovis init');
     var self = this;
     this.audio = audio;
-    
-    if(window.AudioContext) {
+
+    if (window.AudioContext) {
         this.ctx = new window.AudioContext();
     } else {
         this.ctx = new window.webkitAudioContext();
     }
-    
-     
+
     this.analyser = self.ctx.createAnalyser();
 
     this.source = self.ctx.createMediaElementSource(self.audio);
@@ -20,7 +18,7 @@ var AudioVis = function (audio, visualizer) {
     this.visualizer = visualizer;
     this.visualizer.setAnalyzer(this.analyser);
     this.visualizer.initialize();
-    
+
     this.audio.onplay = function () {
         console.log('onplay');
         self.visualizer.start();
@@ -28,6 +26,18 @@ var AudioVis = function (audio, visualizer) {
 
     this.audio.onpause = function () {
         self.visualizer.stop();
+    };
+
+    ////////////////
+    
+    this.setVisualizer = function (visualizer) {
+//        if (self.visualizer) {
+//            self.visualizer.stop();
+//        }
+
+        this.audio.pause();
+        
+        self.visualizer = visualizer;
     };
 
 };

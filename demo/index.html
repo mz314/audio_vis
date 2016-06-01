@@ -1,12 +1,26 @@
 <html>
     <head>
         <script src="../js/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="../js/vendor/three.js/three.min.js"></script>
         <script src="../js/dist/audiovis.js"></script>
         <script src="play.js"></script>
     </head>
     <body>
-
-        <div>
+        <div id="visualizer-selector">
+            <a href="bar">
+                Bars
+            </a>
+            <a href="waveform"> 
+                WaveForm
+            </a>
+            <a href="glball">
+                GLBall
+            </a>
+            <a href="clog">
+                Console log
+            </a>
+        </div>
+        <div id="c-container">
             <canvas id="v-canvas"
                    style="width: 500px; height:200px"
                     ></canvas>
