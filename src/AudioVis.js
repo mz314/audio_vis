@@ -37,12 +37,10 @@ var AudioVis = function (audio, visualizer) {
     this.setVisualizer(visualizer);
 
     $(this.audio).on('play', function () {
-        console.log('onplay');
         self.visualizer.start();
     });
 
     $(this.audio).on('pause', function () {
-        console.log('onstop');
         self.visualizer.stop();
     });
 

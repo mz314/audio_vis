@@ -1,0 +1,9 @@
+#visualizer-selector {
+    margin: 10px 0;
+}
+#visualizer-selector a {
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid black;
+    
+}

@@ -43,7 +43,7 @@ var bindDemoSwitch = function () {
 $(function () {
 
 
-    vis = new AudioVis($('#audio-track').get(0), getVisualizer('bar'));
+    vis = new AudioVis($('#audio-track').get(0), getVisualizer('glball'));
 
     $("#play").click(function () {
 

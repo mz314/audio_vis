@@ -7,6 +7,23 @@ var VisHelper = {
         return "#" + VisHelper.componentToHex(r) +
                 VisHelper.componentToHex(g) +
                 VisHelper.componentToHex(b);
+    },
+    calcAverage: function (array, skip) {
+        var
+                n = 0,
+                sum = 0
+                ;
+                
+        for (var i in array) {
+            if (skip && i % 128 !== 0) {
+                continue;
+            }
+
+            sum += array[i];
+            n++;
+        }
+
+        return sum / n;
     }
 
 };
