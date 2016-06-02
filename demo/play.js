@@ -19,7 +19,10 @@ var getVisualizer = function (type) {
             break;
             
         case 'glball':
-            visualizer = new GLBallVisualizer('#c-container');
+            visualizer = new GLBallVisualizer('#c-container', {
+                width: 500,
+                height: 200
+            });
             break;
     }
 
@@ -32,7 +35,7 @@ var bindDemoSwitch = function () {
         e.preventDefault();
         type = $(this).attr('href');
         visualizer = getVisualizer(type);
-        vis.setVisualizer(type);
+        vis.setVisualizer(visualizer);
 
     });
 };
@@ -53,6 +56,6 @@ $(function () {
         $('#audio-track').get(0).pause();
     });
 
-   // bindDemoSwitch();
+    bindDemoSwitch();
 
 });

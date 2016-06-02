@@ -98,3 +98,7 @@ BarVisualizer.prototype.stop = function () {
     }, self.parameters.refreshInterval);
 
 };
+
+BarVisualizer.prototype.destroy = function () {
+  $(this.canvas).remove();  
+};

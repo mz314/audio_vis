@@ -1,22 +1,26 @@
-var GLBallVisualizer = function (containerSelector) {
+var GLBallVisualizer = function (containerSelector, options) {
     this.containerSelector = containerSelector;
     this.do_reshape = false;
+    this.options = $.extend({
+        width: $(containerSelector).width(),
+        height: $(containerSelector).height()
+    }, options);
 };
 
 GLBallVisualizer.prototype = new Visualizer();
 
 GLBallVisualizer.prototype.initialize = function () {
 
-    var canv = $(this.containerSelector).find('canvas');
-    console.log('ball initialize', canv.width(), canv.height());
+    this.frame_id = null;
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(75, canv.width() / canv.height(), 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(75, this.options.width / this.options.height,
+            0.1, 1000);
     this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setSize(canv.width(), canv.height());
+    this.renderer.setSize(this.options.width, this.options.height);
     this.prev_scale = 0;
     this.interval = null;
-    document.body.appendChild(this.renderer.domElement);
-    canv.hide();
+    $(this.containerSelector).html(this.renderer.domElement);
+
     this.max_ball = 6;
     this.interval_step = 10;
 
@@ -30,11 +34,11 @@ GLBallVisualizer.prototype.initialize = function () {
     box_geometry = new THREE.BoxGeometry(90, 80, 90);
     box_material = new THREE.MeshPhongMaterial({color: 0x00ff00, opacity: 0.4, transparent: true});
     this.box = new THREE.Mesh(box_geometry, box_material);
-    this.box.position.z = - 100;
+    this.box.position.z = -100;
     this.box.rotation.y = 1;
     this.box.rotation.x = 0.1;
     this.scene.add(this.box);
-    
+
     ambient_light = new THREE.AmbientLight(0x404040, 1);
     this.scene.add(ambient_light);
 
@@ -59,10 +63,10 @@ GLBallVisualizer.prototype.reshape = function () {
         n++;
     }
 
-    avg = sum/n;
-    scale = 1+(avg % 1)*(this.max_ball-1) ;
+    avg = sum / n;
+    scale = 1 + (avg % 1) * (this.max_ball - 1);
 
-  
+
 
     this.ball.scale.x = this.ball.scale.y = scale;
 
@@ -71,7 +75,7 @@ GLBallVisualizer.prototype.reshape = function () {
 
 GLBallVisualizer.prototype.render = function () {
     var self = this;
-    requestAnimationFrame(function () {
+    this.frame_id = requestAnimationFrame(function () {
         self.render();
     });
 
@@ -81,10 +85,20 @@ GLBallVisualizer.prototype.render = function () {
 
 GLBallVisualizer.prototype.start = function () {
     var self = this;
-    if(!this.interval) {
+    if (!this.interval) {
         this.interval = setInterval(function () {
             self.reshape();
         }, this.interval_step);
     }
+};
 
+GLBallVisualizer.prototype.destroy = function () {
+    if (this.interval) {
+        clearInterval(this.interval);
+    }
+    console.log('GLBALLdestroy');
+    if (this.frame_id) {
+        cancelAnimationFrame(this.frame_id);
+    }
+    $(this.renderer.domElement).remove();
 };
